@@ -29,7 +29,7 @@ namespace UnitTest
 			std::vector<int> vec = { -1, 2, -3, 4, -5 };
 
 			// Act
-			int result = countNegativeElementsTRecursive(vec, 0);
+			int result = countNegativeElementsT(vec, 0);
 
 			// Assert
 			Assert::AreEqual(3, result);
