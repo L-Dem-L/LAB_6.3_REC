@@ -17,7 +17,7 @@ namespace UnitTest
 			int arr[size] = { -1, 2, -3, 4, -5 };
 
 			// Act
-			int result = countNegativeElementsRecursive(arr, size, 0);
+			int result = countNegativeElements(arr, size);
 
 			// Assert
 			Assert::AreEqual(3, result);
@@ -26,10 +26,11 @@ namespace UnitTest
 		TEST_METHOD(TestMethodT)
 		{
 			// Arrange
-			std::vector<int> vec = { -1, 2, -3, 4, -5 };
+			const int size = 5;
+			int arr[size] = { -1, 2, -3, 4, -5 };
 
 			// Act
-			int result = countNegativeElementsT(vec, 0);
+			int result = countNegativeElementsT(arr, size);
 
 			// Assert
 			Assert::AreEqual(3, result);
