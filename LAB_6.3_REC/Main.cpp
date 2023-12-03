@@ -1,50 +1,99 @@
 #include <iostream>
 #include <iomanip>
 
-template <typename T>
-void printArray(const T arr[], const int size, int index = 0) {
+void fillArrayRecursive(int arr[], int size, int index = 0) {
+    if (index == size) {
+        return;
+    }
+
+    std::cout;
+    std::cin >> arr[index];
+
+    fillArrayRecursive(arr, size, index + 1);
+}
+
+void printArrayRecursive(const int arr[], int size, int index = 0) {
     if (index == size) {
         std::cout << std::endl;
         return;
     }
 
     std::cout << arr[index] << std::setw(4);
-    printArray(arr, size, index + 1);
-}
-
-int countNegativeElements(const int arr[], const int size, int index = 0) {
-    if (index == size) {
-        return 0;
-    }
-
-    return (arr[index] < 0 ? 1 : 0) + countNegativeElements(arr, size, index + 1);
+    printArrayRecursive(arr, size, index + 1);
 }
 
 template <typename T>
-int countNegativeElementsT(const T arr[], const int size, int index = 0) {
+void fillArrayRecursive(T arr[], int size, int index = 0) {
+    if (index == size) {
+        return;
+    }
+
+    std::cout;
+    std::cin >> arr[index];
+
+    fillArrayRecursive(arr, size, index + 1);
+}
+
+template <typename T>
+void printArrayRecursive(const T arr[], int size, int index = 0) {
+    if (index == size) {
+        std::cout << std::endl;
+        return;
+    }
+
+    std::cout << arr[index] << std::setw(4);
+    printArrayRecursive(arr, size, index + 1);
+}
+
+int countNegativeElementsRecursive(const int arr[], const int size, int index = 0) {
     if (index == size) {
         return 0;
     }
 
-    int count = (arr[index] < 0 ? 1 : 0) + countNegativeElementsT(arr, size, index + 1);
+    return (arr[index] < 0 ? 1 : 0) + countNegativeElementsRecursive(arr, size, index + 1);
+}
 
-    if (index == 0) {
-        std::cout << "Number of negative elements in array <T>: " << count << std::endl;
+template <typename T>
+int countNegativeElementsTRecursive(const T arr[], const int size, int index = 0) {
+    if (index == size) {
+        std::cout << std::endl;
+        return 0;
     }
 
-    return count;
+    int count = (arr[index] < 0 ? 1 : 0);
+    return count + countNegativeElementsTRecursive(arr, size, index + 1);
 }
 
 int main() {
-    int arr[] = { -1, 2, 3, -4, 5 };
-    const int arrSize = sizeof(arr) / sizeof(arr[0]);
+    int size;
 
-    printArray(arr, arrSize);
+    std::cout << "Enter the size of the array: ";
+    std::cin >> size;
 
-    int result = countNegativeElements(arr, arrSize);
+    if (size <= 0) {
+        std::cerr << "Invalid array size\n";
+        return 1;
+    }
+
+    int* arr = new int[size];
+
+    fillArrayRecursive(arr, size);
+    printArrayRecursive(arr, size);
+
+    std::cout << "Enter elements <T>: \n";
+
+    double* arrDouble = new double[size];
+    fillArrayRecursive(arrDouble, size);
+    printArrayRecursive(arrDouble, size);
+
+    int result = countNegativeElementsRecursive(arr, size);
     std::cout << "Number of negative elements in array: " << result << std::endl;
 
-    int resultArrayT = countNegativeElementsT(arr, arrSize);
+    int resultArrayT = countNegativeElementsTRecursive(arr, size);
+    std::cout << "Number of negative elements in array <T>: " << resultArrayT << std::endl;
+
+    delete[] arr;
+    delete[] arrDouble;
 
     return 0;
 }
